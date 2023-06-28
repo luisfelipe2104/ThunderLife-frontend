@@ -28,7 +28,7 @@ function HabitTracker() {
           <Container key={index}>
           {last7Days.map((day, index) => {
             return (
-              <Button onPress={() => setModalVisible(true)}>
+              <Button key={index} onPress={() => setModalVisible(true)}>
                 <ButtonText>{getDayOfWeek(day)}</ButtonText>
               </Button>
             )

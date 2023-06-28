@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 
-import HabitTracker from './screens/HabitTracker/HabitTracker';
+import TabRoutes from './routes/TabRoutes';
 
 export default function App() {
-
   return (
-    <HabitTracker />
-  );
+    <TabRoutes />
+  )
 }
