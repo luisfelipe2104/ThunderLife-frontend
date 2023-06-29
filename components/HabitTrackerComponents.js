@@ -85,3 +85,15 @@ export const HeaderContainerWrapper = styled.View`
     width: 130px;
     padding-left: 8px;
 `
+
+export const InputContainer = styled.View`
+
+`
+
+export const Input = styled.TextInput`
+    border: 0px solid #8f8f8f;
+    border-bottom-width: 2px;
+    padding: 8px 10px;
+    /* height: 30px; */
+    font-size: 20px
+`
