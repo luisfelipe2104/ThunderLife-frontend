@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Text, View, Modal, StatusBar, StyleSheet } from 'react-native';
+import { Text, View, Modal, TouchableOpacity } from 'react-native'
+;
 import HabitTrackerModal from '../../components/modals/HabitTrackerModal.js';
-import { Container, Button, ButtonText } from "../../components/HabitTrackerComponents.js";
+
+import { Header, HeaderTitle, Container, Button, ButtonText } from "../../components/HabitTrackerComponents.js";
 
 import { getLast7Days, getDayOfWeek } from '../../helpers/habitTrackerHelpers.js';
+
+import { Ionicons } from '@expo/vector-icons'; 
 
 function HabitTracker() {
   const [last7Days, setLast7Days] = useState([])
@@ -22,7 +26,13 @@ function HabitTracker() {
   }, [])
 
   return (
-    <View style={styles.container}>
+    <View>
+      <Header>
+        <HeaderTitle>My Habits</HeaderTitle>
+        <TouchableOpacity>
+          <Ionicons name="add" size={35} color="#FFF" />
+        </TouchableOpacity>
+      </Header>
       {tasks.map((task, index) => {
         return (
           <Container key={index}>
@@ -49,14 +59,5 @@ function HabitTracker() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default HabitTracker

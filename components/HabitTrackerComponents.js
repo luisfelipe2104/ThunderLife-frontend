@@ -8,6 +8,23 @@ export const Container = styled.View`
     /* padding: 7 7; */
 `
 
+export const Header = styled.View`
+    width: 100%;
+    height: 60px;
+    background-color: #64e866;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px;
+`
+
+export const HeaderTitle = styled.Text`
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 900;
+`
+
 export const Button = styled.TouchableOpacity`
     height: 50px;
     width: 50px;
