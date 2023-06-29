@@ -9,7 +9,7 @@ import { getLast7Days, getDayOfWeek } from '../../helpers/habitTrackerHelpers.js
 
 import { Ionicons } from '@expo/vector-icons'; 
 
-function HabitTracker() {
+function HabitTracker({ navigation }) {
   const [last7Days, setLast7Days] = useState([])
   const [tasks, setTasks] = useState([1])
   const [modalVisible, setModalVisible] = useState(false);
@@ -29,7 +29,7 @@ function HabitTracker() {
     <View>
       <Header>
         <HeaderTitle>My Habits</HeaderTitle>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('CreateHabit')}>
           <Ionicons name="add" size={35} color="#FFF" />
         </TouchableOpacity>
       </Header>

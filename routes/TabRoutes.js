@@ -9,7 +9,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 
-import HabitTracker from '../screens/HabitTracker/HabitTracker';
+import { HabitTrackerScreens } from './StackRoutes';
 import Notes from '../screens/Notes/Notes'
 import Settings from '../screens/Settings/Settings'
 import ToDo from '../screens/ToDo/ToDo'
@@ -27,7 +27,7 @@ export default function TabRoutes() {
 
         <Tab.Screen
           name="HabitTracker"
-          component={HabitTracker
+          component={HabitTrackerScreens
         }
           options={{
             headerShown: false,

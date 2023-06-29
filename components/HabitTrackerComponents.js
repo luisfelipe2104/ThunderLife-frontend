@@ -77,3 +77,11 @@ export const ModalContainer = styled.TouchableOpacity`
     align-items: center;
     border-radius: 15px;
 `
+
+export const HeaderContainerWrapper = styled.View`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 130px;
+    padding-left: 8px;
+`

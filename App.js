@@ -6,6 +6,8 @@ import TabRoutes from './routes/TabRoutes';
 import { DataProvider } from './contexts/DataContext';
 import Toast from 'react-native-toast-message';
 
+import 'react-native-gesture-handler';
+
 export default function App() {
   return (
     <NavigationContainer>
