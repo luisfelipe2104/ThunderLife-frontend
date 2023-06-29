@@ -2,6 +2,10 @@ import React from 'react'
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native'
 import { ModalContainer, CenteredContainer, Button } from '../HabitTrackerComponents'
 
+import { MaterialIcons } from '@expo/vector-icons'; 
+import { AntDesign } from '@expo/vector-icons'; 
+import { Octicons } from '@expo/vector-icons'; 
+
 function HabitTrackerModal({ handleClose }) {
   return (
     <TouchableOpacity activeOpacity={1} onPress={() => handleClose()} style={styles.container}>
@@ -11,13 +15,13 @@ function HabitTrackerModal({ handleClose }) {
               onPress={() => handleClose()}
               style={{ backgroundColor: "green" }}
             >
-              <Text>ok</Text>
+              <MaterialIcons name="done" size={24} color="black" />
             </Button>
             <Button style={{ backgroundColor: "red" }}>
-              <Text>no</Text>
+              <AntDesign name="close" size={24} color="black" />
             </Button>
             <Button style={{ backgroundColor: "gray" }}>
-              <Text>op</Text>
+              <Octicons name="dash" size={24} color="black" />
             </Button>
           </ModalContainer>
         </CenteredContainer>
