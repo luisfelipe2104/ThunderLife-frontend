@@ -18,7 +18,6 @@ export default function TabRoutes() {
     const Tab = createBottomTabNavigator();
 
     return (
-      <NavigationContainer>
       <Tab.Navigator
         initialRouteName="HabitTracker"
         backBehavior="history"
@@ -79,6 +78,5 @@ export default function TabRoutes() {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
     );
 }

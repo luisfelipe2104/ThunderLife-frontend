@@ -46,7 +46,6 @@ function HabitTracker() {
           handleClose={() => setModalVisible(false)}
         />
       </Modal>
-      <StatusBar style="auto" />
     </View>
   )
 }
