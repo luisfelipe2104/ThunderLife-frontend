@@ -5,14 +5,25 @@ import { Header, HeaderTitle, HeaderContainerWrapper, InputContainer, Input } fr
 import { Feather } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons';  
 
+import { createHabit } from '../../services/habit';
+import { DataContext } from '../../contexts/DataContext';
+
 export default function CreateHabit({ navigation }) {
-    const [habitTitle, setHabitTitle] = useState('')
+    const [habitName, setHabitName] = useState('')
     const [habitDescritpion, setHabitDescritpion] = useState('')
     const [habitGoal, setHabitGoal] = useState(null)
 
+    const { user_id } = useContext(DataContext)
+
     const handleSubmit = async () => {
-        console.log(habitTitle, habitDescritpion, habitGoal);
-        navigation.navigate('HabitTracker')
+        console.log(habitName, habitDescritpion, habitGoal, user_id);
+        try {
+            const result = await createHabit(habitName, habitDescritpion, habitGoal, user_id)
+            console.log(result);
+            navigation.navigate('HabitTracker')
+        } catch (err) {
+            console.log(err);
+        }
     }
 
   return (
@@ -31,8 +42,8 @@ export default function CreateHabit({ navigation }) {
         </Header>
         <InputContainer>
             <Input
-                value={habitTitle}
-                onChangeText={(text) => setHabitTitle(text)}
+                value={habitName}
+                onChangeText={(text) => setHabitName(text)}
                 placeholder='Habit Title'
                 maxLength={20}
             />
