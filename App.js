@@ -5,6 +5,7 @@ import TabRoutes from './routes/TabRoutes';
 
 import { DataProvider } from './contexts/DataContext';
 import Toast from 'react-native-toast-message';
+import { toastConfig } from './components/toast/toastConfig';
 
 import 'react-native-gesture-handler';
 
@@ -13,7 +14,7 @@ export default function App() {
     <NavigationContainer>
       <DataProvider>
         <TabRoutes />
-        <Toast />
+        <Toast config={toastConfig} />
         <StatusBar backgroundColor="#000" barStyle={'light-content'} />
       </DataProvider>
     </NavigationContainer>

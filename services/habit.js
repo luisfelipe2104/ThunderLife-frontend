@@ -4,8 +4,8 @@ export const createHabit = async (taskName, taskDescription, taskGoal, user_id) 
     try {
         const taskData = { taskName, taskDescription, taskGoal, user_id}
         const { data } = await api.post(`/api/task`, taskData)
-        return data.msg
+        return { data: data.msg, status: 'success' }
     } catch (err) {
-        return err.response.data.msg
+        return { data: err.response.data.msg, status: 'error' }
     }
 }

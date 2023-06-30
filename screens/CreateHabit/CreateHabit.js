@@ -8,6 +8,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { createHabit } from '../../services/habit';
 import { DataContext } from '../../contexts/DataContext';
 
+import { showToastSuccess, showToastError } from '../../components/toast/Toast';
+
 export default function CreateHabit({ navigation }) {
     const [habitName, setHabitName] = useState('')
     const [habitDescritpion, setHabitDescritpion] = useState('')
@@ -19,8 +21,12 @@ export default function CreateHabit({ navigation }) {
         console.log(habitName, habitDescritpion, habitGoal, user_id);
         try {
             const result = await createHabit(habitName, habitDescritpion, habitGoal, user_id)
-            console.log(result);
-            navigation.navigate('HabitTracker')
+            if (result.status === 'success') {
+                showToastSuccess(result.data, '');
+                navigation.navigate('HabitTracker')
+            } else {
+                showToastError(result.data, '')
+            }
         } catch (err) {
             console.log(err);
         }
