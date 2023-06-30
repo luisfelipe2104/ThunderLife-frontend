@@ -5,7 +5,6 @@ export const Container = styled.View`
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
-    /* padding: 7 7; */
 `
 
 export const Header = styled.View`
@@ -26,8 +25,8 @@ export const HeaderTitle = styled.Text`
 `
 
 export const Button = styled.TouchableOpacity`
-    height: 50px;
-    width: 50px;
+    height: 45px;
+    width: 45px;
     border-radius: 100px;
     display: flex;
     align-items: center;
@@ -95,5 +94,24 @@ export const Input = styled.TextInput`
     border-bottom-width: 2px;
     padding: 8px 10px;
     /* height: 30px; */
-    font-size: 20px
+    font-size: 20px;
+`
+
+export const HabitContainer = styled.View`
+    padding: 10px 8px;
+    border: 0px solid #c9c9c9;
+    border-bottom-width: 1px;
+`
+
+export const HabitDetailText = styled.Text`
+    margin-top: 2px;
+    margin-bottom: 7px;
+    font-size: 12px;
+    font-weight: 600;
+`
+
+export const HabitTitle = styled.Text`
+    font-size: 18px;
+    color: #033c96;
+    font-weight: 600;
 `

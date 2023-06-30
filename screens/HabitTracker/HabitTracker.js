@@ -3,26 +3,29 @@ import { Text, View, Modal, TouchableOpacity } from 'react-native'
 ;
 import HabitTrackerModal from '../../components/modals/HabitTrackerModal.js';
 
-import { Header, HeaderTitle, Container, Button, ButtonText } from "../../components/HabitTrackerComponents.js";
+import { Header, HabitContainer, HabitDetailText, HabitTitle, HeaderTitle, Container, Button, ButtonText } from "../../components/HabitTrackerComponents.js";
 
 import { getLast7Days, getDayOfWeek } from '../../helpers/habitTrackerHelpers.js';
 
 import { Ionicons } from '@expo/vector-icons'; 
 
+import { getHabits } from '../../services/habit.js';
+import { DataContext } from '../../contexts/DataContext.js';
+
 function HabitTracker({ navigation }) {
+  const { user_id } = useContext(DataContext)
   const [last7Days, setLast7Days] = useState([])
-  const [tasks, setTasks] = useState([1])
+  const [habits, setHabits] = useState([1])
   const [modalVisible, setModalVisible] = useState(false);
 
+  const getData = async () => {
+    const data = await getHabits(user_id)
+    setHabits(data)
+  }
+
   useEffect(() => {
-    // const getTasks = async () => {
-    //   const results = await axios.get('http://localhost:3333/task/get-tasks')
-    //   console.log(results.data);
-    //   setTasks(results.data)
-    //   return results.data
-    // } 
-    // getTasks()
     setLast7Days(getLast7Days())
+    getData()
   }, [])
 
   return (
@@ -33,17 +36,21 @@ function HabitTracker({ navigation }) {
           <Ionicons name="add" size={35} color="#FFF" />
         </TouchableOpacity>
       </Header>
-      {tasks.map((task, index) => {
+      {habits.map((habit, index) => {
         return (
-          <Container key={index}>
-          {last7Days.map((day, index) => {
-            return (
-              <Button key={index} onPress={() => setModalVisible(true)}>
-                <ButtonText>{getDayOfWeek(day)}</ButtonText>
-              </Button>
-            )
-          })}
-          </Container>
+          <HabitContainer key={index}>
+            <HabitTitle>{habit.habitName}</HabitTitle>
+            <HabitDetailText>Streak: +0  |  Goal: +{habit.habitGoal}</HabitDetailText>
+            <Container>
+            {last7Days.map((day, index) => {
+              return (
+                <Button key={index} onPress={() => setModalVisible(true)}>
+                  <ButtonText>{getDayOfWeek(day)}</ButtonText>
+                </Button>
+              )
+            })}
+            </Container>
+          </HabitContainer>
         )
       })}
       <Modal
