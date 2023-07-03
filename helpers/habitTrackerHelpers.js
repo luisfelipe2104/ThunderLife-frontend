@@ -2,7 +2,7 @@ export const getDayOfWeek = (day) => {
     const daysOfWeek = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
     const date = new Date(day)
     let n =  date.getDay();
-    console.log(date.getDay());
+    // console.log(date.getDay());
     return daysOfWeek[n];
 };
 

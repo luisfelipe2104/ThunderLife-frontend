@@ -16,6 +16,8 @@ function HabitTracker({ navigation }) {
   const { user_id } = useContext(DataContext)
   const [last7Days, setLast7Days] = useState([])
   const [habits, setHabits] = useState([1])
+  const [habitId, setHabitId] = useState(null)
+  const [streakDay, setStreakDay] = useState(null)
   const [modalVisible, setModalVisible] = useState(false);
 
   const getData = async () => {
@@ -44,7 +46,11 @@ function HabitTracker({ navigation }) {
             <Container>
             {last7Days.map((day, index) => {
               return (
-                <Button key={index} onPress={() => setModalVisible(true)}>
+                <Button key={index} onPress={() => {
+                  setHabitId(habit.id)
+                  setStreakDay(day)
+                  setModalVisible(true)
+                }}>
                   <ButtonText>{getDayOfWeek(day)}</ButtonText>
                 </Button>
               )
@@ -60,6 +66,8 @@ function HabitTracker({ navigation }) {
         onRequestClose={() => setModalVisible(false)}
       >
         <HabitTrackerModal 
+          habit_id={habitId} 
+          date={streakDay} 
           handleClose={() => setModalVisible(false)}
         />
       </Modal>
