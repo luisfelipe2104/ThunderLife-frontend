@@ -18,3 +18,12 @@ export const getHabits = async (user_id) => {
         console.log(err);
     }
 }
+
+export const deleteHabit = async (habitId) => {
+    try {
+        const { data } = await api.delete(`/api/habit/?habitId=${habitId}`)
+        return data.msg
+    } catch (err) {
+        console.log(err);
+    }
+}

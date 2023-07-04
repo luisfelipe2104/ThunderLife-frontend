@@ -59,6 +59,7 @@ function HabitTracker({ navigation }) {
             <HabitContainer 
               key={item.id}
               onLongPress={() => {
+                setHabitId(item.id)
                 Vibration.vibrate(100)
                 setDeleteModalVisible(true)
               }}
@@ -122,7 +123,6 @@ function HabitTracker({ navigation }) {
       >
         <DeleteHabitModal 
           habit_id={habitId} 
-          date={streakDay} 
           getData={getData}
           handleClose={() => setDeleteModalVisible(false)}
         />
