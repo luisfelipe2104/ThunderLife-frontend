@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Text, View, Modal, TouchableOpacity, FlatList } from 'react-native'
 import { useIsFocused } from '@react-navigation/native';
-import HabitTrackerModal from '../../components/modals/HabitTrackerModal.js';
 
+import { Text, View, Modal, TouchableOpacity, FlatList, Vibration } from 'react-native'
+import HabitTrackerModal from '../../components/modals/HabitTrackerModal.js';
+import DeleteHabitModal from '../../components/modals/DeleteHabitModal.js';
 import { Header, HabitContainer, HabitDetailText, HabitTitle, HeaderTitle, Container, Button, ButtonText } from "../../components/HabitTrackerComponents.js";
 
 import { getLast7Days, getDayOfWeek } from '../../helpers/habitTrackerHelpers.js';
@@ -19,6 +20,7 @@ function HabitTracker({ navigation }) {
   const [habitId, setHabitId] = useState(null)
   const [streakDay, setStreakDay] = useState(null)
   const [modalVisible, setModalVisible] = useState(false);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
 
   //Refresh page when change the route
   const isFocused = useIsFocused();
@@ -54,7 +56,13 @@ function HabitTracker({ navigation }) {
         style={{marginBottom: 60}}
         renderItem={({ item }) => {
           return (
-            <HabitContainer key={item.id}>
+            <HabitContainer 
+              key={item.id}
+              onLongPress={() => {
+                Vibration.vibrate(100)
+                setDeleteModalVisible(true)
+              }}
+            >
             <HabitTitle>{item.habitName}</HabitTitle>
             <HabitDetailText>Streak: +0  |  Goal: +{item.habitGoal}</HabitDetailText>
             <Container>
@@ -104,6 +112,19 @@ function HabitTracker({ navigation }) {
           date={streakDay} 
           getData={getData}
           handleClose={() => setModalVisible(false)}
+        />
+      </Modal>
+      
+      <Modal
+        visible={deleteModalVisible}
+        transparent={true}
+        onRequestClose={() => setDeleteModalVisible(false)}
+      >
+        <DeleteHabitModal 
+          habit_id={habitId} 
+          date={streakDay} 
+          getData={getData}
+          handleClose={() => setDeleteModalVisible(false)}
         />
       </Modal>
     </View>

@@ -97,7 +97,7 @@ export const Input = styled.TextInput`
     font-size: 20px;
 `
 
-export const HabitContainer = styled.View`
+export const HabitContainer = styled.TouchableOpacity`
     padding: 10px 8px;
     border: 0px solid #c9c9c9;
     border-bottom-width: 1px;
@@ -114,4 +114,30 @@ export const HabitTitle = styled.Text`
     font-size: 18px;
     color: #033c96;
     font-weight: 600;
+`
+
+export const ContainerRoundedButton = styled.View`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 150px;
+`
+
+export const DeleteText = styled.Text`
+    color: #FFFFFF;
+    width: 90%;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 18px;
+`
+
+export const RoundedButton = styled.TouchableOpacity`
+    height: 60px;
+    width: 60px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 `
