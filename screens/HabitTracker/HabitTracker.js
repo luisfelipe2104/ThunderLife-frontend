@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Text, View, Modal, TouchableOpacity } from 'react-native'
-;
+import { Text, View, Modal, TouchableOpacity, FlatList } from 'react-native'
+import { useIsFocused } from '@react-navigation/native';
 import HabitTrackerModal from '../../components/modals/HabitTrackerModal.js';
 
 import { Header, HabitContainer, HabitDetailText, HabitTitle, HeaderTitle, Container, Button, ButtonText } from "../../components/HabitTrackerComponents.js";
@@ -15,10 +15,13 @@ import { DataContext } from '../../contexts/DataContext.js';
 function HabitTracker({ navigation }) {
   const { user_id } = useContext(DataContext)
   const [last7Days, setLast7Days] = useState([])
-  const [habits, setHabits] = useState([1])
+  const [habits, setHabits] = useState(null)
   const [habitId, setHabitId] = useState(null)
   const [streakDay, setStreakDay] = useState(null)
   const [modalVisible, setModalVisible] = useState(false);
+
+  //Refresh page when change the route
+  const isFocused = useIsFocused();
 
   const getData = async () => {
     const data = await getHabits(user_id)
@@ -28,7 +31,15 @@ function HabitTracker({ navigation }) {
   useEffect(() => {
     setLast7Days(getLast7Days())
     getData()
-  }, [])
+  }, [isFocused])
+
+  if (!habits) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
 
   return (
     <View>
@@ -38,16 +49,37 @@ function HabitTracker({ navigation }) {
           <Ionicons name="add" size={35} color="#FFF" />
         </TouchableOpacity>
       </Header>
-      {habits.map((habit, index) => {
-        return (
-          <HabitContainer key={index}>
-            <HabitTitle>{habit.habitName}</HabitTitle>
-            <HabitDetailText>Streak: +0  |  Goal: +{habit.habitGoal}</HabitDetailText>
+      <FlatList 
+        data={habits}
+        style={{marginBottom: 60}}
+        renderItem={({ item }) => {
+          return (
+            <HabitContainer key={item.id}>
+            <HabitTitle>{item.habitName}</HabitTitle>
+            <HabitDetailText>Streak: +0  |  Goal: +{item.habitGoal}</HabitDetailText>
             <Container>
             {last7Days.map((day, index) => {
+              const getBackgroundColor = () => {
+                const streak = item.streak
+                  let background = 'gray'
+                  for (let i = 0; i < streak.length; i++) {
+                    if (streak[i].date === day) {
+                      streak[i].status === 'positive' ? background = 'green' : null
+                      streak[i].status === 'negative' ? background = 'red' : null
+                      streak[i].status === 'partial' ? background = 'blue' : null
+                      return background;
+                    } else {
+                      background = 'gray';
+                    }
+                  }
+                return background
+              }
               return (
-                <Button key={index} onPress={() => {
-                  setHabitId(habit.id)
+                <Button 
+                  key={index} 
+                  style={{ backgroundColor: getBackgroundColor() }}
+                  onPress={() => {
+                  setHabitId(item.id)
                   setStreakDay(day)
                   setModalVisible(true)
                 }}>
@@ -57,8 +89,10 @@ function HabitTracker({ navigation }) {
             })}
             </Container>
           </HabitContainer>
-        )
-      })}
+          )
+        } 
+      }
+      />
       <Modal
         visible={modalVisible}
         animationType="slide"
@@ -68,6 +102,7 @@ function HabitTracker({ navigation }) {
         <HabitTrackerModal 
           habit_id={habitId} 
           date={streakDay} 
+          getData={getData}
           handleClose={() => setModalVisible(false)}
         />
       </Modal>

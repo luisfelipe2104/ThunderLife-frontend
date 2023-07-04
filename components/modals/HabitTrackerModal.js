@@ -9,13 +9,14 @@ import { Octicons } from '@expo/vector-icons';
 import { DataContext } from '../../contexts/DataContext';
 import { trackHabit } from '../../services/streak';
 
-function HabitTrackerModal({ handleClose, habit_id, date }) {
+function HabitTrackerModal({ handleClose, habit_id, date, getData }) {
   const { user_id } = useContext(DataContext)
 
   const handleSubmit = async (status) => {
     console.log(user_id, habit_id, status, date);
     await trackHabit(habit_id, user_id, date, '', status)
-    .then(() => handleClose())
+    getData()
+    handleClose()
   }
 
   return (
