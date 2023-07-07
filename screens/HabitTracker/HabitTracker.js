@@ -58,6 +58,7 @@ function HabitTracker({ navigation }) {
           return (
             <HabitContainer 
               key={item.id}
+              onPress={() => navigation.navigate('HabitInfo')}
               onLongPress={() => {
                 setHabitId(item.id)
                 Vibration.vibrate(100)
@@ -70,7 +71,7 @@ function HabitTracker({ navigation }) {
             {last7Days.map((day, index) => {
               const getBackgroundColor = () => {
                 const streak = item.streak
-                  let background = 'gray'
+                  let background = '#b5b5b5'
                   for (let i = 0; i < streak.length; i++) {
                     if (streak[i].date === day) {
                       streak[i].status === 'positive' ? background = '#3f9406' : null

@@ -9,6 +9,8 @@ import { toastConfig } from './components/toast/toastConfig';
 
 import 'react-native-gesture-handler';
 
+// eas build -p android --profile preview
+
 export default function App() {
   return (
     <NavigationContainer>
