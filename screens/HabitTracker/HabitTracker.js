@@ -65,7 +65,7 @@ function HabitTracker({ navigation }) {
               }}
             >
             <HabitTitle>{item.habitName}</HabitTitle>
-            <HabitDetailText>Streak: +0  |  Goal: +{item.habitGoal}</HabitDetailText>
+            <HabitDetailText>Streak: +{item.streakCounter}  |  Goal: +{item.habitGoal}</HabitDetailText>
             <Container>
             {last7Days.map((day, index) => {
               const getBackgroundColor = () => {
