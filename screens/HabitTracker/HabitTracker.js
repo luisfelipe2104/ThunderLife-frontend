@@ -44,7 +44,7 @@ function HabitTracker({ navigation }) {
   }
 
   return (
-    <View>
+    <View style={{backgroundColor: '#000', minHeight: '100%'}}>
       <Header>
         <HeaderTitle>My Habits</HeaderTitle>
         <TouchableOpacity onPress={() => navigation.navigate('CreateHabit')}>
@@ -73,12 +73,12 @@ function HabitTracker({ navigation }) {
                   let background = 'gray'
                   for (let i = 0; i < streak.length; i++) {
                     if (streak[i].date === day) {
-                      streak[i].status === 'positive' ? background = 'green' : null
-                      streak[i].status === 'negative' ? background = 'red' : null
-                      streak[i].status === 'partial' ? background = 'blue' : null
+                      streak[i].status === 'positive' ? background = '#3f9406' : null
+                      streak[i].status === 'negative' ? background = '#ff0000' : null
+                      streak[i].status === 'partial' ? background = '#5c5c5c' : null
                       return background;
                     } else {
-                      background = 'gray';
+                      background = '#b5b5b5';
                     }
                   }
                 return background

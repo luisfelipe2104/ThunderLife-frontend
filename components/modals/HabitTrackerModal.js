@@ -25,19 +25,19 @@ function HabitTrackerModal({ handleClose, habit_id, date, getData }) {
           <ModalContainer activeOpacity={1}>
             <Button
               onPress={() => handleSubmit('positive')}
-              style={{ backgroundColor: "green" }}
+              style={{ backgroundColor: "#3f9406" }}
             >
               <MaterialIcons name="done" size={24} color="black" />
             </Button>
             <Button 
               onPress={() => handleSubmit('negative')}
-              style={{ backgroundColor: "red" }}
+              style={{ backgroundColor: "#ff0000" }}
             >
               <AntDesign name="close" size={24} color="black" />
             </Button>
             <Button 
               onPress={() => handleSubmit('partial')}
-              style={{ backgroundColor: "gray" }}
+              style={{ backgroundColor: "#5c5c5c" }}
             >
               <Octicons name="dash" size={24} color="black" />
             </Button>

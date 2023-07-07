@@ -33,7 +33,7 @@ export default function CreateHabit({ navigation }) {
     }
 
   return (
-    <View>
+    <View style={{backgroundColor: '#000', minHeight: '100%'}}>
         <Header>
             <HeaderContainerWrapper>
                 <TouchableOpacity onPress={() => navigation.navigate('HabitTracker')}>
@@ -51,12 +51,14 @@ export default function CreateHabit({ navigation }) {
                 value={habitName}
                 onChangeText={(text) => setHabitName(text)}
                 placeholder='Habit Title'
+                placeholderTextColor="#858585" 
                 maxLength={20}
             />
             <Input 
                 value={habitDescritpion}
                 onChangeText={(text) => setHabitDescritpion(text)}
                 placeholder='Description (Optional)'
+                placeholderTextColor="#858585" 
                 maxLength={40}
             />
             <Input 
@@ -65,6 +67,7 @@ export default function CreateHabit({ navigation }) {
                 keyboardType="numeric"
                 maxLength={3}
                 placeholder='Goal (How many days)'
+                placeholderTextColor="#858585" 
             />
         </InputContainer>
     </View>

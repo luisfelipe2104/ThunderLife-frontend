@@ -10,7 +10,7 @@ export const Container = styled.View`
 export const Header = styled.View`
     width: 100%;
     height: 60px;
-    background-color: #64e866;
+    background-color: #2b5c0a;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -31,7 +31,7 @@ export const Button = styled.TouchableOpacity`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: gray;
+    background-color: #b5b5b5;
 `
 
 export const ButtonText = styled.Text`
@@ -68,7 +68,7 @@ export const CenteredContainer = styled.View`
 export const ModalContainer = styled.TouchableOpacity`
     height: 130px;
     width: 190px;
-    background: rgba(199, 195, 183, 0.9);
+    background: rgba(110, 110, 110, 0.9);
     margin: auto;
     display: flex;
     flex-direction: row;
@@ -90,6 +90,7 @@ export const InputContainer = styled.View`
 `
 
 export const Input = styled.TextInput`
+    color: #FFFFFF;
     border: 0px solid #8f8f8f;
     border-bottom-width: 2px;
     padding: 8px 10px;
@@ -104,6 +105,7 @@ export const HabitContainer = styled.TouchableOpacity`
 `
 
 export const HabitDetailText = styled.Text`
+    color: #FFFFFF;
     margin-top: 2px;
     margin-bottom: 7px;
     font-size: 12px;
@@ -112,7 +114,7 @@ export const HabitDetailText = styled.Text`
 
 export const HabitTitle = styled.Text`
     font-size: 18px;
-    color: #033c96;
+    color: #FFFFFF;
     font-weight: 600;
 `
 
