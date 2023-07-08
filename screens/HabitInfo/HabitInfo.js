@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { Header, HeaderTitle, HeaderContainerWrapper, InputContainer, Input } from '../../components/HabitTrackerComponents'
 
@@ -14,10 +14,30 @@ export default function HabitInfo({ navigation }) {
     const [habitName, setHabitName] = useState('')
     const [habitDescritpion, setHabitDescritpion] = useState('')
     const [habitGoal, setHabitGoal] = useState(null)
-
-    const { user_id } = useContext(DataContext)
-    const [selected, setSelected] = useState('');
+    const [loaded, setLoaded] = useState(false)
     
+    const [streakData, setStreakData] = useState({})
+    const { user_id, habitStreak } = useContext(DataContext)
+    // const [selected, setSelected] = useState('');
+
+    function merge_options(obj1,obj2){
+        var obj3 = {};
+        for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
+        for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+        return obj3;
+    }
+
+    const handleStreakData = () => {
+        habitStreak.forEach(async (streak) => {
+            const sla = {}
+            streakData[streak.date] = {selected: true, marked: false, selectedColor: streak.status == 'positive' && '#3f9406' || streak.status == 'negative' && '#ff0000' || streak.status == 'partial' && '#5c5c5c'}
+            setStreakData(merge_options(sla, streakData))
+        });
+    }
+    
+    useEffect(() => {
+        handleStreakData()
+    }, [habitStreak])
 
   return (
     <View style={{backgroundColor: '#000', minHeight: '100%'}}>
@@ -36,14 +56,11 @@ export default function HabitInfo({ navigation }) {
         
         <Calendar
             onDayPress={day => {
-                setSelected(day.dateString);
+                // setSelected(day.dateString);
             }}
-            markedDates={{
-                '2023-07-07': {selected: true, marked: true, selectedColor: 'red'},
-                '2023-07-08': {marked: true},
-                '2023-07-09': {selected: true, marked: true, selectedColor: 'red'},
-                [selected]: {selected: true, disableTouchEvent: true, selectedDotColor: 'orange'}
-            }}
+            markedDates={
+                streakData
+            }
             style={{
                 borderWidth: 1,
                 borderColor: 'gray',

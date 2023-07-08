@@ -6,6 +6,7 @@ export const DataContext = createContext();
 export function DataProvider({ children }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [user_id, setUser_id] = useState('1')
+    const [habitStreak, setHabitStreak] = useState([])
     const logout = () => setIsLoggedIn(false)
     
     useEffect(() => {
@@ -19,7 +20,9 @@ export function DataProvider({ children }) {
             setIsLoggedIn,
             user_id, 
             setUser_id,
-            logout
+            logout,
+            habitStreak, 
+            setHabitStreak,
         }}
     >
         { children }

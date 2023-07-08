@@ -14,7 +14,7 @@ import { getHabits } from '../../services/habit.js';
 import { DataContext } from '../../contexts/DataContext.js';
 
 function HabitTracker({ navigation }) {
-  const { user_id } = useContext(DataContext)
+  const { user_id, setHabitStreak } = useContext(DataContext)
   const [last7Days, setLast7Days] = useState([])
   const [habits, setHabits] = useState(null)
   const [habitId, setHabitId] = useState(null)
@@ -58,7 +58,10 @@ function HabitTracker({ navigation }) {
           return (
             <HabitContainer 
               key={item.id}
-              onPress={() => navigation.navigate('HabitInfo')}
+              onPress={() => {
+                setHabitStreak(item.streak)
+                navigation.navigate('HabitInfo')
+              }}
               onLongPress={() => {
                 setHabitId(item.id)
                 Vibration.vibrate(100)
