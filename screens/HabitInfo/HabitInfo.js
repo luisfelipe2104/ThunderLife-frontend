@@ -1,11 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
 import { Header, HeaderTitle, HeaderContainerWrapper, InputContainer, Input } from '../../components/HabitTrackerComponents'
 
 import { Feather } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons';  
 
 import {Calendar, LocaleConfig} from 'react-native-calendars';
+import { ContributionGraph } from 'react-native-chart-kit';
 import { DataContext } from '../../contexts/DataContext';
 
 import { showToastSuccess, showToastError } from '../../components/toast/Toast';
@@ -19,6 +20,39 @@ export default function HabitInfo({ navigation }) {
     const [streakData, setStreakData] = useState({})
     const { user_id, habitStreak } = useContext(DataContext)
     // const [selected, setSelected] = useState('');
+
+    const screenWidth = Dimensions.get("window").width
+
+    const chartConfig = {
+        backgroundGradientFrom: "rgba(107, 107, 107, 0.9)",
+        backgroundGradientTo: "rgba(31, 30, 30, 0.9)",
+        decimalPlaces: 2, // optional, defaults to 2dp
+        color: (opacity = 1) => `rgba(112, 255, 71, ${opacity})`,
+        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+        style: {
+          borderRadius: 16
+        },
+        propsForDots: {
+          r: "6",
+          strokeWidth: "2",
+          stroke: "#ffa726",
+          backgroundColor: "#01300e"
+        }
+      }
+
+    const commitsData = [
+        { date: "1000-06-27", count: 1 },
+        { date: "2023-06-28", count: 1 },
+        { date: "2023-06-29", count: 1 },
+        { date: "2023-06-30", count: 1 },
+        { date: "2023-07-01", count: 1 },
+        { date: "2023-07-02", count: 1 },
+        { date: "2023-07-03", count: 1 },
+        { date: "2023-07-04", count: 1 },
+        { date: "2023-07-05", count: 1 },
+        { date: "2023-07-06", count: 1 },
+        { date: "2023-07-07", count: 1 }
+      ];
 
     function merge_options(obj1,obj2){
         var obj3 = {};
@@ -40,7 +74,7 @@ export default function HabitInfo({ navigation }) {
     }, [habitStreak])
 
   return (
-    <View style={{backgroundColor: '#000', minHeight: '100%'}}>
+    <ScrollView style={{backgroundColor: '#000', minHeight: '100%'}}>
         <Header>
             <HeaderContainerWrapper>
                 <TouchableOpacity onPress={() => navigation.navigate('HabitTracker')}>
@@ -54,39 +88,52 @@ export default function HabitInfo({ navigation }) {
             </TouchableOpacity>
         </Header>
         
-        <Calendar
-            onDayPress={day => {
-                // setSelected(day.dateString);
-            }}
-            markedDates={
-                streakData
-            }
-            style={{
-                borderWidth: 1,
-                borderColor: 'gray',
-                backgroundColor: '#000000',
-                color: '#FFFFFF',
-                height: 400,
-                borderRadius: 15,
-                marginHorizontal: 2,
-                marginTop: 10,
-            }}
-              theme={{
-                backgroundColor: '#000000',
-                calendarBackground: '#000000',
-                textSectionTitleColor: '#FFFFFF',
-                selectedDayBackgroundColor: '#00adf5',
-                selectedDayTextColor: '#ffffff',
-                todayTextColor: '#00adf5',
-                dayTextColor: '#FFFFFF',
-                textDisabledColor: '#d9e',
-                monthTextColor: '#FFFFFF',
-                arrowColor: '#FFFFFF',
-                arrowStyle: {
-                    color: '#FFFFFF'
+        <View>
+            <Calendar
+                onDayPress={day => {
+                    // setSelected(day.dateString);
+                }}
+                markedDates={
+                    streakData
                 }
-              }}
-        />
-    </View>
+                style={{
+                    borderWidth: 1,
+                    borderColor: 'gray',
+                    backgroundColor: '#000000',
+                    color: '#FFFFFF',
+                    height: 400,
+                    borderRadius: 15,
+                    marginHorizontal: 2,
+                    marginTop: 10,
+                }}
+                theme={{
+                    backgroundColor: '#000000',
+                    calendarBackground: '#000000',
+                    textSectionTitleColor: '#FFFFFF',
+                    selectedDayBackgroundColor: '#00adf5',
+                    selectedDayTextColor: '#ffffff',
+                    todayTextColor: '#00adf5',
+                    dayTextColor: '#FFFFFF',
+                    textDisabledColor: '#d9e',
+                    monthTextColor: '#FFFFFF',
+                    arrowColor: '#FFFFFF',
+                    arrowStyle: {
+                        color: '#FFFFFF'
+                    }
+                }}
+            />
+        </View>
+
+        <View style={{display: 'flex', alignItems: 'center', width: '100%', marginTop: 10}}>
+            <ContributionGraph
+                values={commitsData}
+                endDate={new Date()}
+                numDays={screenWidth / 4}
+                width={(screenWidth / 100) * 95}
+                height={220}
+                chartConfig={chartConfig}
+            />
+        </View>
+    </ScrollView>
   )
 }
