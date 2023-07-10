@@ -18,6 +18,7 @@ export default function HabitInfo({ navigation }) {
     const [loaded, setLoaded] = useState(false)
     
     const [streakData, setStreakData] = useState({})
+    const [commitsData, setCommitsData] = useState([])
     const { user_id, habitStreak } = useContext(DataContext)
     // const [selected, setSelected] = useState('');
 
@@ -40,25 +41,23 @@ export default function HabitInfo({ navigation }) {
         }
       }
 
-    const commitsData = [
-        { date: "1000-06-27", count: 1 },
-        { date: "2023-06-28", count: 1 },
-        { date: "2023-06-29", count: 1 },
-        { date: "2023-06-30", count: 1 },
-        { date: "2023-07-01", count: 1 },
-        { date: "2023-07-02", count: 1 },
-        { date: "2023-07-03", count: 1 },
-        { date: "2023-07-04", count: 1 },
-        { date: "2023-07-05", count: 1 },
-        { date: "2023-07-06", count: 1 },
-        { date: "2023-07-07", count: 1 }
-      ];
 
     function merge_options(obj1,obj2){
         var obj3 = {};
         for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
         for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
         return obj3;
+    }
+
+    const handleCommits = async () => {
+        const streakArray = habitStreak;
+        await streakArray.forEach(async (streak) => {
+            if (streak.status === "positive") {
+                const commit = { date: streak.date, count: 1 }
+                commitsData.push(commit)
+                setCommitsData(commitsData)
+            }
+        });
     }
 
     const handleStreakData = () => {
@@ -71,6 +70,7 @@ export default function HabitInfo({ navigation }) {
     
     useEffect(() => {
         handleStreakData()
+        handleCommits()
     }, [habitStreak])
 
   return (
