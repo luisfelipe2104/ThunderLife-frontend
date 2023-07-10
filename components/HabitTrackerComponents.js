@@ -68,7 +68,7 @@ export const CenteredContainer = styled.View`
 export const ModalContainer = styled.TouchableOpacity`
     height: 130px;
     width: 190px;
-    background: rgba(110, 110, 110, 0.9);
+    background: rgba(59, 59, 59, 0.9);
     margin: auto;
     display: flex;
     flex-direction: row;

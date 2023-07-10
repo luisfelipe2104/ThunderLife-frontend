@@ -91,24 +91,29 @@ export default function HabitInfo({ navigation }) {
         <View>
             <Calendar
                 onDayPress={day => {
-                    // setSelected(day.dateString);
+                    console.log('selected day', day);
                 }}
                 markedDates={
                     streakData
                 }
+                // hideExtraDays={true}
+                // maxDate={new Date()}
+
                 style={{
                     borderWidth: 1,
                     borderColor: 'gray',
-                    backgroundColor: '#000000',
+                    backgroundColor: '#2e2e2e',
                     color: '#FFFFFF',
-                    height: 400,
+                    paddingVertical: 20,
                     borderRadius: 15,
                     marginHorizontal: 2,
                     marginTop: 10,
                 }}
                 theme={{
-                    backgroundColor: '#000000',
-                    calendarBackground: '#000000',
+                    backgroundColor: '#3b3b3b',
+                    borderRadius: 20,
+                    
+                    calendarBackground: '#3b3b3b',
                     textSectionTitleColor: '#FFFFFF',
                     selectedDayBackgroundColor: '#00adf5',
                     selectedDayTextColor: '#ffffff',
@@ -119,6 +124,14 @@ export default function HabitInfo({ navigation }) {
                     arrowColor: '#FFFFFF',
                     arrowStyle: {
                         color: '#FFFFFF'
+                    },
+
+                    stylesheet: {
+                        calendar: {
+                            main: {
+                                borderRadius: 20,
+                            }
+                        }
                     }
                 }}
             />
