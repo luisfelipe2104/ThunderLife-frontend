@@ -6,9 +6,13 @@ export const DataContext = createContext();
 export function DataProvider({ children }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [user_id, setUser_id] = useState('1')
-    const [habitStreak, setHabitStreak] = useState([])
     const logout = () => setIsLoggedIn(false)
-    
+
+    const [habitStreak, setHabitStreak] = useState([])
+    const [habitGoal, setHabitGoal] = useState('')
+    const [streakCounter, setStreakCounter] = useState('')
+    const [habitName, setHabitName] = useState('')
+
     useEffect(() => {
 
     }, [])
@@ -23,6 +27,12 @@ export function DataProvider({ children }) {
             logout,
             habitStreak, 
             setHabitStreak,
+            habitGoal, 
+            setHabitGoal,
+            habitName, 
+            setHabitName,
+            streakCounter, 
+            setStreakCounter,
         }}
     >
         { children }

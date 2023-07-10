@@ -1,25 +1,23 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { View, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
-import { Header, HeaderTitle, HeaderContainerWrapper, InputContainer, Input } from '../../components/HabitTrackerComponents'
+import { Header, HeaderTitle, HabitTitle, HeaderContainerWrapper, InputContainer, Input } from '../../components/HabitTrackerComponents'
 
 import { Feather } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons';  
 
-import {Calendar, LocaleConfig} from 'react-native-calendars';
+import { Calendar } from 'react-native-calendars';
 import { ContributionGraph } from 'react-native-chart-kit';
 import { DataContext } from '../../contexts/DataContext';
 
 import { showToastSuccess, showToastError } from '../../components/toast/Toast';
 
 export default function HabitInfo({ navigation }) {
-    const [habitName, setHabitName] = useState('')
     const [habitDescritpion, setHabitDescritpion] = useState('')
-    const [habitGoal, setHabitGoal] = useState(null)
     const [loaded, setLoaded] = useState(false)
     
     const [streakData, setStreakData] = useState({})
     const [commitsData, setCommitsData] = useState([])
-    const { user_id, habitStreak } = useContext(DataContext)
+    const { user_id, habitStreak, habitName, habitGoal, streakCounter } = useContext(DataContext)
     // const [selected, setSelected] = useState('');
 
     const screenWidth = Dimensions.get("window").width
@@ -71,6 +69,7 @@ export default function HabitInfo({ navigation }) {
     useEffect(() => {
         handleStreakData()
         handleCommits()
+        console.log(habitName, habitGoal, streakCounter);
     }, [habitStreak])
 
   return (
@@ -88,6 +87,9 @@ export default function HabitInfo({ navigation }) {
             </TouchableOpacity>
         </Header>
         
+        <HabitTitle>{habitName}</HabitTitle>
+        <HabitTitle>{streakCounter}/{habitGoal}</HabitTitle>
+
         <View>
             <Calendar
                 onDayPress={day => {
@@ -124,14 +126,6 @@ export default function HabitInfo({ navigation }) {
                     arrowColor: '#FFFFFF',
                     arrowStyle: {
                         color: '#FFFFFF'
-                    },
-
-                    stylesheet: {
-                        calendar: {
-                            main: {
-                                borderRadius: 20,
-                            }
-                        }
                     }
                 }}
             />

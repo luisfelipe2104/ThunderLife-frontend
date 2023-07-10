@@ -14,7 +14,7 @@ import { getHabits } from '../../services/habit.js';
 import { DataContext } from '../../contexts/DataContext.js';
 
 function HabitTracker({ navigation }) {
-  const { user_id, setHabitStreak } = useContext(DataContext)
+  const { user_id, setHabitStreak, setHabitName, setHabitGoal, setStreakCounter } = useContext(DataContext)
   const [last7Days, setLast7Days] = useState([])
   const [habits, setHabits] = useState(null)
   const [habitId, setHabitId] = useState(null)
@@ -60,6 +60,9 @@ function HabitTracker({ navigation }) {
               key={item.id}
               onPress={() => {
                 setHabitStreak(item.streak)
+                setHabitName(item.habitName)
+                setHabitGoal(item.habitGoal)
+                setStreakCounter(item.streakCounter)
                 navigation.navigate('HabitInfo')
               }}
               onLongPress={() => {
