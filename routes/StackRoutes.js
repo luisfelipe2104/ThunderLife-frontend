@@ -7,7 +7,9 @@ const Stack = createStackNavigator();
 
 export function HabitTrackerScreens() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      animationEnabled: false
+    }}>
       <Stack.Screen name="HabitTracker" options={{headerShown: false}} component={HabitTracker} />
       <Stack.Screen name="CreateHabit" options={{headerShown: false}} component={CreateHabit} />
       <Stack.Screen name="HabitInfo" options={{headerShown: false}} component={HabitInfo} />
