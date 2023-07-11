@@ -1,5 +1,6 @@
 import React from 'react'
 import { createContext, useState, useEffect } from "react";
+import * as SecureStore from 'expo-secure-store';
 
 export const DataContext = createContext();
 
@@ -13,8 +14,22 @@ export function DataProvider({ children }) {
     const [streakCounter, setStreakCounter] = useState('')
     const [habitName, setHabitName] = useState('')
 
-    useEffect(() => {
+    async function getUserIsLoggedIn() {
+      let loginStatus = await SecureStore.getItemAsync('isUserLoggedIn');
+      let userId = await SecureStore.getItemAsync('user_id');
+  
+      if (loginStatus == 'loggedIn') {
+        setUser_id(userId);
+        setIsLoggedIn(true)
+      } else {
+        setUser_id(null)
+        setIsLoggedIn(false)
+      }
+      return loginStatus
+    }
 
+    useEffect(() => {
+      getUserIsLoggedIn()
     }, [])
 
   return (
