@@ -1,12 +1,24 @@
 import styled from "styled-components/native";
 
 export const Container = styled.View`
-    background-color: #000000;
+    background-color: #2b2b2b;
     min-height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+`
+
+export const WelcomeContainer = styled.View`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+export const LogoImage = styled.Image`
+    height: 200px; 
+    width: 200px;
 `
 
 export const LandingText = styled.Text`
@@ -40,7 +52,7 @@ export const LoginButton = styled.TouchableOpacity`
 `
 
 export const RegisterButton = styled.TouchableOpacity`
-    background-color: #000000;
+    background-color: #2b2b2b;
     padding: 3px 3px;
     border-radius: 15px;
     border: 3px solid #edea0c;
@@ -51,7 +63,7 @@ export const LoginButtonText = styled.Text`
     text-align: center;
     font-size: 23px;
     font-weight: 600;
-    border: 3px solid #000;
+    border: 3px solid #2b2b2b;
     border-radius: 15px;
     padding: 8px 30px;
 `
@@ -63,4 +75,12 @@ export const RegisterButtonText = styled.Text`
     font-weight: 600;
     border-radius: 15px;
     padding: 8px 30px;
+`
+
+export const FooterContainer = styled.View`
+
+`
+
+export const WavesImage = styled.Image`
+    height: 180px;
 `
