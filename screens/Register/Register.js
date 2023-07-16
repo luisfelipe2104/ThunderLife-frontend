@@ -1,10 +1,45 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
+import { Container, AuthNavigationTextContainer, KeyboardAvoidingView, ImpactPhrase, AuthNavigationText, AuthTitle, WavesImage, FooterContainer, TitleContainer, InputContainer, Input } from '../../components/AuthComponents'
 
-export default function Register() {
+import waves from '../../assets/waves.png'
+
+export default function Register({ navigation }) {
   return (
-    <View>
-        <Text>Register</Text>
-    </View>
+    <Container>
+        <TitleContainer>
+          <AuthTitle>⚡Register⚡</AuthTitle>
+          <ImpactPhrase>"Put your heart in everything"</ImpactPhrase>
+        </TitleContainer>
+
+        <InputContainer>
+          <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+            <Input 
+              placeholder='Name'
+              placeholderTextColor="#858585"
+            />
+            <Input 
+              placeholder='Email'
+              placeholderTextColor="#858585"  
+            />
+            <Input 
+              placeholder='Password'
+              placeholderTextColor="#858585"
+            />
+            <Input 
+              placeholder='Confirm Password'
+              placeholderTextColor="#858585"
+            />
+
+            <AuthNavigationTextContainer onPress={() => navigation.navigate('Login')} >
+              <AuthNavigationText>Already have an account?</AuthNavigationText>
+            </AuthNavigationTextContainer>
+          </KeyboardAvoidingView>
+        </InputContainer>
+
+        <FooterContainer>
+          <WavesImage source={waves} />
+        </FooterContainer>
+    </Container>
   )
 }

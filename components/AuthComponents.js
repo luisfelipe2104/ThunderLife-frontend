@@ -94,31 +94,39 @@ export const FooterContainer = styled.View`
 `
 
 export const WavesImage = styled.Image`
-    height: 180px;
+    height: 100%;
 `
 
 export const InputContainer = styled.View`
     width: 100%;
     height: 57%;
-    /* border: 2px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     
+    /* border: 2px solid red; */
 `
+
+export const AuthNavigationTextContainer = styled.TouchableOpacity`
+    width: 100%;
+    padding: 0 10%;
+    `
 
 export const AuthNavigationText = styled.Text`
     color: #FFF;
     font-weight: 600;
     font-size: 18px;
-    padding: 0 10%;
-`
+    `
 
 export const KeyboardAvoidingView = styled.KeyboardAvoidingView`
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100px;
+    height: auto;
     justify-content: space-between;
-    margin-top: 20%;
+    /* margin-top: 20%; */
+
 `
 
 export const Input = styled.TextInput`
@@ -128,6 +136,7 @@ export const Input = styled.TextInput`
     font-size: 19px;
     background-color: #454545;
     margin-bottom: 10px;
+    /* border-color: #000; */
     border-bottom-width: 2px;
     border-bottom-color: #edea0c;
     border-radius: 8px;
