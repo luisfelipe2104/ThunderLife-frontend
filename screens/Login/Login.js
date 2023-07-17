@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Container, AuthNavigationTextContainer, KeyboardAvoidingView, ImpactPhrase, AuthNavigationText, AuthTitle, WavesImage, FooterContainer, TitleContainer, InputContainer, Input } from '../../components/AuthComponents'
+import { Container, RegisterButton, RegisterButtonText, ButtonContainer, AuthNavigationTextContainer, KeyboardAvoidingView, ImpactPhrase, AuthNavigationText, AuthTitle, WavesImage, FooterContainer, TitleContainer, InputContainer, Input } from '../../components/AuthComponents'
 
 import waves from '../../assets/waves.png'
 
@@ -22,10 +22,16 @@ export default function Login({ navigation }) {
               placeholder='Password'
               placeholderTextColor="#858585"
             />
+            <AuthNavigationTextContainer onPress={() => navigation.navigate('Register')} >
+                <AuthNavigationText>Don't you have an account?</AuthNavigationText>
+            </AuthNavigationTextContainer>
+
+            <ButtonContainer>
+              <RegisterButton>
+                <RegisterButtonText>Login</RegisterButtonText>
+              </RegisterButton>
+            </ButtonContainer>
           </KeyboardAvoidingView>
-          <AuthNavigationTextContainer onPress={() => navigation.navigate('Register')} >
-              <AuthNavigationText>Don'n you have an account?</AuthNavigationText>
-          </AuthNavigationTextContainer>
         </InputContainer>
 
         <FooterContainer>

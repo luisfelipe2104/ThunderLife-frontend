@@ -56,6 +56,8 @@ export const LoginButton = styled.TouchableOpacity`
     background-color: #edea0c;
     padding: 3px 3px;
     border-radius: 15px;
+    margin-bottom: 30px;
+    height: 60px;
 `
 
 export const RegisterButton = styled.TouchableOpacity`
@@ -63,7 +65,7 @@ export const RegisterButton = styled.TouchableOpacity`
     padding: 3px 3px;
     border-radius: 15px;
     border: 3px solid #edea0c;
-    margin-top: 30px;
+    height: 60px;
 `
 
 export const LoginButtonText = styled.Text`
@@ -103,19 +105,19 @@ export const InputContainer = styled.View`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+    align-items: center;
     /* border: 2px solid red; */
 `
 
 export const AuthNavigationTextContainer = styled.TouchableOpacity`
     width: 100%;
-    padding: 0 10%;
+    padding: 0 0 0 10%;
     `
 
 export const AuthNavigationText = styled.Text`
     color: #FFF;
-    font-weight: 600;
-    font-size: 18px;
+    font-weight: 700;
+    font-size: 17px;
     `
 
 export const KeyboardAvoidingView = styled.KeyboardAvoidingView`
@@ -124,7 +126,7 @@ export const KeyboardAvoidingView = styled.KeyboardAvoidingView`
     flex-direction: column;
     align-items: center;
     height: auto;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     /* margin-top: 20%; */
 
 `
@@ -134,12 +136,12 @@ export const Input = styled.TextInput`
     padding: 3px 5px 3px 7px;
     color: #FFF;
     font-size: 19px;
-    background-color: #454545;
+    /* background-color: #454545; */
     margin-bottom: 10px;
     /* border-color: #000; */
     border-bottom-width: 2px;
     border-bottom-color: #edea0c;
-    border-radius: 8px;
+    /* border-radius: 8px; */
 `
 
 export const TitleContainer = styled.View`
@@ -153,5 +155,5 @@ export const AuthTitle = styled.Text`
     color: #FFF;
     font-size: 35px;
     font-weight: 800;
-    margin-bottom: 10px;
+    /* margin-bottom: -2px; */
 `
