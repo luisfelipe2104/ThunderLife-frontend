@@ -17,9 +17,9 @@ export const login = async (email, password) => {
     try {
         const { data } = await api.post(`/api/login`, userData)
         console.log(data);
-        return data
+        return { data: data.msg, user: data.user, status: 'success' }
     } catch (err) {
-        console.log(err);
-        return err
+        console.log({ data: err.response.data.msg, status: 'error' })
+        return { data: err.response.data.msg, status: 'error' }
     }
 }

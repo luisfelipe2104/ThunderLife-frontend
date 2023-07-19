@@ -14,6 +14,13 @@ export function DataProvider({ children }) {
     const [streakCounter, setStreakCounter] = useState('')
     const [habitName, setHabitName] = useState('')
 
+    async function handleLogin(userId) {
+      await SecureStore.setItemAsync("user_id", String(userId))
+      await SecureStore.setItemAsync("isUserLoggedIn", 'loggedIn')
+
+      getUserIsLoggedIn()
+    }
+
     async function getUserIsLoggedIn() {
       let loginStatus = await SecureStore.getItemAsync('isUserLoggedIn');
       let userId = await SecureStore.getItemAsync('user_id');
@@ -35,6 +42,7 @@ export function DataProvider({ children }) {
   return (
     <DataContext.Provider
         value={{
+            handleLogin,
             isLoggedIn, 
             setIsLoggedIn,
             user_id, 
