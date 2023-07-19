@@ -102,6 +102,7 @@ export const WavesImage = styled.Image`
 export const InputContainer = styled.View`
     width: 100%;
     height: 57%;
+    min-height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -137,7 +138,7 @@ export const Input = styled.TextInput`
     color: #FFF;
     font-size: 19px;
     /* background-color: #454545; */
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     /* border-color: #000; */
     border-bottom-width: 2px;
     border-bottom-color: #edea0c;
