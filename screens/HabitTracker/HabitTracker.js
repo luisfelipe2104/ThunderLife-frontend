@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { RefreshControl } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
-
 import { Text, View, Modal, TouchableOpacity, FlatList, Vibration } from 'react-native'
 import HabitTrackerModal from '../../components/modals/HabitTrackerModal.js';
 import DeleteHabitModal from '../../components/modals/DeleteHabitModal.js';
 import { Header, HabitContainer, HabitDetailText, HabitTitle, HeaderTitle, Container, Button, ButtonText } from "../../components/HabitTrackerComponents.js";
-
+import { MainContainer } from '../../components/HabitTrackerComponents.js';
 import { getLast7Days, getDayOfWeek } from '../../helpers/habitTrackerHelpers.js';
 
 import { Ionicons } from '@expo/vector-icons'; 
@@ -17,6 +17,7 @@ function HabitTracker({ navigation }) {
   const { user_id, setHabitStreak, setHabitName, setHabitGoal, setStreakCounter } = useContext(DataContext)
   const [last7Days, setLast7Days] = useState([])
   const [habits, setHabits] = useState(null)
+  const [refreshing, setRefreshing] = useState(false);
   const [habitId, setHabitId] = useState(null)
   const [streakDay, setStreakDay] = useState(null)
   const [modalVisible, setModalVisible] = useState(false);
@@ -30,6 +31,14 @@ function HabitTracker({ navigation }) {
     setHabits(data)
   }
 
+  const handleRefresh = () => {
+    setRefreshing(true);
+    setTimeout(async () => {
+      await getData();
+      setRefreshing(false);
+    }, 1);
+  };
+
   useEffect(() => {
     setLast7Days(getLast7Days())
     getData()
@@ -37,14 +46,14 @@ function HabitTracker({ navigation }) {
 
   if (!habits) {
     return (
-      <View>
+      <MainContainer>
         <Text>Loading...</Text>
-      </View>
+      </MainContainer>
     )
   }
 
   return (
-    <View style={{backgroundColor: '#000', minHeight: '100%'}}>
+    <MainContainer>
       <Header>
         <HeaderTitle>My Habits</HeaderTitle>
         <TouchableOpacity onPress={() => navigation.navigate('CreateHabit')}>
@@ -53,6 +62,9 @@ function HabitTracker({ navigation }) {
       </Header>
       <FlatList 
         data={habits}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
+        }
         style={{marginBottom: 60}}
         renderItem={({ item }) => {
           return (
@@ -134,7 +146,7 @@ function HabitTracker({ navigation }) {
           handleClose={() => setDeleteModalVisible(false)}
         />
       </Modal>
-    </View>
+    </MainContainer>
   )
 }
 

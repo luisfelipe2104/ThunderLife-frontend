@@ -3,7 +3,7 @@ import { Dimensions } from "react-native";
 const screenHeight = Dimensions.get('window').height
 
 export const Container = styled.View`
-    background-color: #2b2b2b;
+    background-color: #262626;
     min-height: 100%;
     width: 100%;
     display: flex;
@@ -61,7 +61,7 @@ export const LoginButton = styled.TouchableOpacity`
 `
 
 export const RegisterButton = styled.TouchableOpacity`
-    background-color: #2b2b2b;
+    background-color: #262626;
     padding: 3px 3px;
     border-radius: 15px;
     border: 3px solid #edea0c;
@@ -73,7 +73,7 @@ export const LoginButtonText = styled.Text`
     text-align: center;
     font-size: 23px;
     font-weight: 600;
-    border: 3px solid #2b2b2b;
+    border: 3px solid #262626;
     border-radius: 15px;
     padding: 8px 30px;
 `

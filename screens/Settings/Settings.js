@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { View, Text } from 'react-native'
+import { MainContainer, Button, ButtonText } from '../../components/HabitTrackerComponents'
+import { DataContext } from '../../contexts/DataContext'
 
 export default function Settings() {
+  const { logout } = useContext(DataContext)
+
   return (
-    <View>
+    <MainContainer>
         <Text>Settings</Text>
-    </View>
+        <Button onPress={() => logout()}>
+          <ButtonText>Logout</ButtonText>
+        </Button>
+    </MainContainer>
   )
 }

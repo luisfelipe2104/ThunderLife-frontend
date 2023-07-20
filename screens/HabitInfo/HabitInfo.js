@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { View, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
-import { Header, HeaderTitle, HabitTitle, HeaderContainerWrapper, InputContainer, Input } from '../../components/HabitTrackerComponents'
+import { Header, HabitName, HabitStreakGoal, SubTitle, RedText, GreenText, MainContainer, HeaderTitle, HabitTitle, HeaderContainerWrapper, InputContainer, Input } from '../../components/HabitTrackerComponents'
 
 import { Feather } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons';  
@@ -73,74 +73,78 @@ export default function HabitInfo({ navigation }) {
     }, [habitStreak])
 
   return (
-    <ScrollView style={{backgroundColor: '#000', minHeight: '100%'}}>
-        <Header>
-            <HeaderContainerWrapper>
-                <TouchableOpacity onPress={() => navigation.navigate('HabitTracker')}>
-                    <Feather name="arrow-left" size={24} color="#FFF" />
+    <MainContainer>
+        <ScrollView>
+            <Header>
+                <HeaderContainerWrapper>
+                    <TouchableOpacity onPress={() => navigation.navigate('HabitTracker')}>
+                        <Feather name="arrow-left" size={24} color="#FFF" />
+                    </TouchableOpacity>
+                    <HeaderTitle>Habit Info</HeaderTitle>
+                </HeaderContainerWrapper>
+
+                <TouchableOpacity onPress={() => navigation.navigate("HabitTracker")}>
+                    <MaterialIcons name="done" size={30} color="#FFF" />
                 </TouchableOpacity>
-                <HeaderTitle>Habit Info</HeaderTitle>
-            </HeaderContainerWrapper>
+            </Header>
+            
+            <HabitName>{habitName}</HabitName>
+            <HabitStreakGoal>Habit goal: {parseInt(streakCounter) < parseInt(habitGoal) ? <RedText>{habitGoal}/{streakCounter}</RedText> : <GreenText>{streakCounter}/{habitGoal}</GreenText>}</HabitStreakGoal>
 
-            <TouchableOpacity onPress={() => navigation.navigate("HabitTracker")}>
-                <MaterialIcons name="done" size={30} color="#FFF" />
-            </TouchableOpacity>
-        </Header>
-        
-        <HabitTitle>{habitName}</HabitTitle>
-        <HabitTitle>{streakCounter}/{habitGoal}</HabitTitle>
-
-        <View>
-            <Calendar
-                onDayPress={day => {
-                    console.log('selected day', day);
-                }}
-                markedDates={
-                    streakData
-                }
-                // hideExtraDays={true}
-                // maxDate={new Date()}
-
-                style={{
-                    borderWidth: 1,
-                    borderColor: 'gray',
-                    backgroundColor: '#2e2e2e',
-                    color: '#FFFFFF',
-                    paddingVertical: 20,
-                    borderRadius: 15,
-                    marginHorizontal: 2,
-                    marginTop: 10,
-                }}
-                theme={{
-                    backgroundColor: '#3b3b3b',
-                    borderRadius: 20,
-                    
-                    calendarBackground: '#3b3b3b',
-                    textSectionTitleColor: '#FFFFFF',
-                    selectedDayBackgroundColor: '#00adf5',
-                    selectedDayTextColor: '#ffffff',
-                    todayTextColor: '#00adf5',
-                    dayTextColor: '#FFFFFF',
-                    textDisabledColor: '#d9e',
-                    monthTextColor: '#FFFFFF',
-                    arrowColor: '#FFFFFF',
-                    arrowStyle: {
-                        color: '#FFFFFF'
+            <View>
+                <SubTitle>Global View</SubTitle>
+                <Calendar
+                    onDayPress={day => {
+                        console.log('selected day', day);
+                    }}
+                    markedDates={
+                        streakData
                     }
-                }}
-            />
-        </View>
+                    // hideExtraDays={true}
+                    // maxDate={new Date()}
 
-        <View style={{display: 'flex', alignItems: 'center', width: '100%', marginTop: 10}}>
-            <ContributionGraph
-                values={commitsData}
-                endDate={new Date()}
-                numDays={screenWidth / 4}
-                width={(screenWidth / 100) * 95}
-                height={220}
-                chartConfig={chartConfig}
-            />
-        </View>
-    </ScrollView>
+                    style={{
+                        borderWidth: 1,
+                        borderColor: 'gray',
+                        backgroundColor: '#2e2e2e',
+                        color: '#FFFFFF',
+                        paddingVertical: 20,
+                        borderRadius: 15,
+                        marginHorizontal: 2,
+                        marginTop: 10,
+                    }}
+                    theme={{
+                        backgroundColor: '#2e2e2e',
+                        borderRadius: 20,
+                        
+                        calendarBackground: '#2e2e2e',
+                        textSectionTitleColor: '#FFFFFF',
+                        selectedDayBackgroundColor: '#00adf5',
+                        selectedDayTextColor: '#ffffff',
+                        todayTextColor: '#00adf5',
+                        dayTextColor: '#FFFFFF',
+                        textDisabledColor: '#d9e',
+                        monthTextColor: '#FFFFFF',
+                        arrowColor: '#FFFFFF',
+                        arrowStyle: {
+                            color: '#FFFFFF'
+                        }
+                    }}
+                />
+            </View>
+
+            <View style={{display: 'flex', alignItems: 'center', width: '100%', marginTop: 10}}>
+                <SubTitle>Commit View</SubTitle>
+                <ContributionGraph
+                    values={commitsData}
+                    endDate={new Date()}
+                    numDays={screenWidth / 4}
+                    width={(screenWidth / 100) * 95}
+                    height={220}
+                    chartConfig={chartConfig}
+                />
+            </View>
+        </ScrollView>
+    </MainContainer>
   )
 }

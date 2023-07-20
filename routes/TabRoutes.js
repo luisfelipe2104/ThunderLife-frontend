@@ -21,12 +21,12 @@ export default function TabRoutes() {
       <Tab.Navigator
       screenOptions={{
         tabBarHideOnKeyboard: true,
-        tabBarStyle: { backgroundColor: '#000' },
+        tabBarStyle: { backgroundColor: '#141414' },
       }}
       initialRouteName="HabitTracker"
       backBehavior="history"
       tabBarOptions={{
-          activeTintColor: '#42f44b',
+          activeTintColor: '#edea0c',
         }}>
 
         <Tab.Screen

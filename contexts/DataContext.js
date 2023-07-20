@@ -6,13 +6,18 @@ export const DataContext = createContext();
 
 export function DataProvider({ children }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [user_id, setUser_id] = useState('1')
-    const logout = () => setIsLoggedIn(false)
-
+    const [user_id, setUser_id] = useState(null)
     const [habitStreak, setHabitStreak] = useState([])
     const [habitGoal, setHabitGoal] = useState('')
     const [streakCounter, setStreakCounter] = useState('')
     const [habitName, setHabitName] = useState('')
+    
+    const logout = async () => {
+      await SecureStore.deleteItemAsync("isUserLoggedIn")
+      await SecureStore.deleteItemAsync("user_id")
+      setIsLoggedIn(false)
+      setUser_id(null)
+    }
 
     async function handleLogin(userId) {
       await SecureStore.setItemAsync("user_id", String(userId))
@@ -28,6 +33,8 @@ export function DataProvider({ children }) {
       if (loginStatus == 'loggedIn') {
         setUser_id(userId);
         setIsLoggedIn(true)
+        console.log(userId);
+        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
       } else {
         setUser_id(null)
         setIsLoggedIn(false)

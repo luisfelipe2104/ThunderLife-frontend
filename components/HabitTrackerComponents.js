@@ -1,5 +1,14 @@
 import styled from "styled-components/native";
 
+export const MainContainer = styled.View`
+    background-color: #222222;
+    min-height: 100%;
+    /* width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; */
+`
+
 export const Container = styled.View`
     display: flex;
     flex-direction: row;
@@ -10,7 +19,7 @@ export const Container = styled.View`
 export const Header = styled.View`
     width: 100%;
     height: 60px;
-    background-color: #2b5c0a;
+    background-color: #454545;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -142,4 +151,45 @@ export const RoundedButton = styled.TouchableOpacity`
     align-items: center;
     justify-content: center;
     
+`
+
+export const HabitName = styled.Text`
+    font-size: 27px;
+    padding: 5px 0px 5px 8px;
+    color: #FFFFFF;
+    font-weight: 600;
+    text-align: center;
+`
+
+export const RedText = styled.Text`
+    font-size: 18px;
+    padding: 5px 0px 5px 8px;
+    color: #ff0000;
+    font-weight: 600;
+    font-style: italic;
+`
+
+export const GreenText = styled.Text`
+    font-size: 18px;
+    color: #3f9406;
+    padding: 5px 0px 5px 8px;
+    font-weight: 600;
+    font-style: italic;
+`
+
+export const HabitStreakGoal = styled.Text`
+    font-size: 18px;
+    padding: 0px 0px 5px 8px;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-style: italic;
+`
+
+export const SubTitle = styled.Text`
+    color: #FFFFFF;
+    font-size: 19px;
+    font-weight: 600;
+    padding: 8px 0px 2px 12px;
+    width: 100%;
+    text-align: center;
 `

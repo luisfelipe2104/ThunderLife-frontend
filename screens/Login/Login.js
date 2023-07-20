@@ -20,7 +20,7 @@ export default function Login({ navigation }) {
       showToastSuccess(response.data)
       const user = response.user
       console.log(user);
-      handleLogin(user._id)
+      handleLogin(user.id)
     } else {
       showToastError(response.data)
     }

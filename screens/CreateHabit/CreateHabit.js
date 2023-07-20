@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { Header, HeaderTitle, HeaderContainerWrapper, InputContainer, Input } from '../../components/HabitTrackerComponents'
+import { Header, MainContainer, HeaderTitle, HeaderContainerWrapper, InputContainer, Input } from '../../components/HabitTrackerComponents'
 
 import { Feather } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons';  
@@ -33,7 +33,7 @@ export default function CreateHabit({ navigation }) {
     }
 
   return (
-    <View style={{backgroundColor: '#000', minHeight: '100%'}}>
+    <MainContainer>
         <Header>
             <HeaderContainerWrapper>
                 <TouchableOpacity onPress={() => navigation.navigate('HabitTracker')}>
@@ -70,6 +70,6 @@ export default function CreateHabit({ navigation }) {
                 placeholderTextColor="#858585" 
             />
         </InputContainer>
-    </View>
+    </MainContainer>
   )
 }
