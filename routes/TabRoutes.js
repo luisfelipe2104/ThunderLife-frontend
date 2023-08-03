@@ -12,7 +12,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { HabitTrackerRoutes } from './StackRoutes';
 import Notes from '../screens/Notes/Notes'
 import Settings from '../screens/Settings/Settings'
-import ToDo from '../screens/ToDo/ToDo'
+import { ToDoRoutes } from './StackRoutes';
 
 export default function TabRoutes() {
     const Tab = createBottomTabNavigator();
@@ -43,7 +43,7 @@ export default function TabRoutes() {
         />
         <Tab.Screen
           name="ToDo"
-          component={ToDo
+          component={ToDoRoutes
         }
           options={{
             headerShown: false,
