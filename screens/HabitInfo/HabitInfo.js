@@ -89,7 +89,7 @@ export default function HabitInfo({ navigation }) {
             </Header>
             
             <HabitName>{habitName}</HabitName>
-            <HabitStreakGoal>Habit goal: {parseInt(streakCounter) < parseInt(habitGoal) ? <RedText>{habitGoal}/{streakCounter}</RedText> : <GreenText>{streakCounter}/{habitGoal}</GreenText>}</HabitStreakGoal>
+            <HabitStreakGoal>Habit goal: {parseInt(streakCounter) < parseInt(habitGoal) ? <RedText>{streakCounter}/{habitGoal}</RedText> : <GreenText>{streakCounter}/{habitGoal}</GreenText>}</HabitStreakGoal>
 
             <View>
                 <SubTitle>Global View</SubTitle>
