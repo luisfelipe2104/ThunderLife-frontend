@@ -16,19 +16,18 @@ export default function ToDo({ navigation }) {
           <Ionicons name="add" size={35} color="#FFF" />
         </TouchableOpacity>
       </Header>
+      <ToDoHeader>
+        <HeaderSubtitle>To-do-list</HeaderSubtitle>
+        <HeaderSubtitle>50%</HeaderSubtitle>
+      </ToDoHeader>
 
       <ToDoList
-        data={[1, 2, 3, 4, 5]}
-        ListHeaderComponent={
-          <ToDoHeader>
-            <HeaderSubtitle>To-do-list</HeaderSubtitle>
-            <HeaderSubtitle>50%</HeaderSubtitle>
-          </ToDoHeader>
-        }
+        data={[1, 2, 3, 4, 5, 6]}
         renderItem={({ item }) => {
           return (
+            <View>
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-              <ToDoContainer style={styles.toDoContainer} >
+              <ToDoContainer style={styles.toDoContainerNotDone} >
                 <ToDoContent>
                   <Checkbox 
                     style={styles.checkbox}
@@ -42,6 +41,23 @@ export default function ToDo({ navigation }) {
                 </ToDoDetails>
               </ToDoContainer>
             </View>
+
+            <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+            <ToDoContainer style={styles.toDoContainerDone} >
+              <ToDoContent>
+                <Checkbox 
+                  style={styles.checkbox}
+                  value={isSelected}
+                  onValueChange={setSelection}
+                />
+                <ToDoTitle>Shower</ToDoTitle>
+              </ToDoContent>
+              <ToDoDetails>
+                <DetailText>10:00 AM</DetailText>
+              </ToDoDetails>
+            </ToDoContainer>
+          </View>
+          </View>
           )
         }}
       />
@@ -50,8 +66,12 @@ export default function ToDo({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  toDoContainer: {
-    borderColor: '#802a2a',
+  toDoContainerNotDone: {
+    borderColor: '#4a4a4a',
+    borderWidth: 1.5
+  },
+  toDoContainerDone: {
+    borderColor: '#4a4a4a',
     borderWidth: 1.5
   },
   checkbox: {
