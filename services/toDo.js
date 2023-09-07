@@ -11,3 +11,14 @@ export const createToDo = async (user_id, toDoName, scheduledHour, toDoDescripti
         return { data: err.response.data.msg, status: 'error' }
     }
 }
+
+export const getToDoList = async (user_id) => {
+    try {
+        const { data } = await api.get(`/api/toDo?userId=${user_id}`)
+        console.log(data);
+        return data
+    } catch (err) {
+        console.log(err);
+        return { data: err.response.data.msg, status: 'error' }
+    }
+}

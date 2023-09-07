@@ -1,12 +1,33 @@
-import { useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { MainContainer, Header, HeaderTitle } from '../../components/HabitTrackerComponents'
 import { ToDoList, HeaderSubtitle, ToDoHeader, ToDoContent, ToDoDetails, DetailText, ToDoTitle, ToDoContainer } from '../../components/ToDoComponents';
 import Checkbox from 'expo-checkbox';
 import { Ionicons } from '@expo/vector-icons'; 
+import { getToDoList } from '../../services/toDo';
+import { DataContext } from '../../contexts/DataContext';
 
 export default function ToDo({ navigation }) {
+  const { user_id } = useContext(DataContext)
   const [isSelected, setSelection] = useState(false)
+  const [toDoList, setToDoList] = useState(null)
+
+  const getData = async () => {
+    const data = await getToDoList(user_id)
+    setToDoList(data)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  if (!toDoList) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
 
   return (
     <MainContainer>
@@ -22,10 +43,9 @@ export default function ToDo({ navigation }) {
       </ToDoHeader>
 
       <ToDoList
-        data={[1, 2, 3, 4, 5, 6]}
+        data={toDoList}
         renderItem={({ item }) => {
           return (
-            <View>
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
               <ToDoContainer style={styles.toDoContainerNotDone} >
                 <ToDoContent>
@@ -34,30 +54,13 @@ export default function ToDo({ navigation }) {
                     value={isSelected}
                     onValueChange={setSelection}
                   />
-                  <ToDoTitle>Shower</ToDoTitle>
+                  <ToDoTitle>{item.toDoName}</ToDoTitle>
                 </ToDoContent>
                 <ToDoDetails>
-                  <DetailText>10:00 AM</DetailText>
+                  <DetailText>{item.scheduledHour}</DetailText>
                 </ToDoDetails>
               </ToDoContainer>
             </View>
-
-            <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-            <ToDoContainer style={styles.toDoContainerDone} >
-              <ToDoContent>
-                <Checkbox 
-                  style={styles.checkbox}
-                  value={isSelected}
-                  onValueChange={setSelection}
-                />
-                <ToDoTitle>Shower</ToDoTitle>
-              </ToDoContent>
-              <ToDoDetails>
-                <DetailText>10:00 AM</DetailText>
-              </ToDoDetails>
-            </ToDoContainer>
-          </View>
-          </View>
           )
         }}
       />
