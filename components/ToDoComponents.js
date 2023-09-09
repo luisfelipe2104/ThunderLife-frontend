@@ -56,3 +56,25 @@ export const DetailText = styled.Text`
     color: #3f65fc;
     font-size: 14px;
 `
+
+export const ButtonContainer = styled.View`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+`
+
+export const ClockButton = styled.TouchableOpacity`
+    background-color: #0a3273;
+    padding: 10px 15px 10px 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`
+
+export const ClockButtonText = styled.Text`
+    font-size: 20px;
+    font-weight: 700;
+    color: #FFFFFF;
+`

@@ -7,10 +7,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { getToDoList } from '../../services/toDo';
 import { DataContext } from '../../contexts/DataContext';
 
+import { useIsFocused } from '@react-navigation/native';
+
 export default function ToDo({ navigation }) {
   const { user_id } = useContext(DataContext)
   const [isSelected, setSelection] = useState(false)
   const [toDoList, setToDoList] = useState(null)
+  const isFocused = useIsFocused()
 
   const getData = async () => {
     const data = await getToDoList(user_id)
@@ -19,7 +22,7 @@ export default function ToDo({ navigation }) {
 
   useEffect(() => {
     getData()
-  }, [])
+  }, [isFocused])
 
   if (!toDoList) {
     return (
