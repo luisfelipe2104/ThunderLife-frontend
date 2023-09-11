@@ -2,8 +2,11 @@ import { useState, useEffect, useContext } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { MainContainer, Header, HeaderTitle } from '../../components/HabitTrackerComponents'
 import { ToDoList, HeaderSubtitle, ToDoHeader, ToDoContent, ToDoDetails, DetailText, ToDoTitle, ToDoContainer } from '../../components/ToDoComponents';
-import Checkbox from 'expo-checkbox';
+
+import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
+
 import { getToDoList } from '../../services/toDo';
 import { DataContext } from '../../contexts/DataContext';
 
@@ -50,13 +53,13 @@ export default function ToDo({ navigation }) {
         renderItem={({ item }) => {
           return (
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-              <ToDoContainer style={styles.toDoContainerNotDone} >
+              <ToDoContainer>
                 <ToDoContent>
-                  <Checkbox 
-                    style={styles.checkbox}
-                    value={isSelected}
-                    onValueChange={setSelection}
-                  />
+                  { item.status === 'done' ? (
+                    <MaterialIcons name="done" size={24} color="black" />
+                  ) : (
+                    <Entypo name="dots-three-horizontal" size={24} color="#4a4646" />
+                  )}
                   <ToDoTitle>{item.toDoName}</ToDoTitle>
                 </ToDoContent>
                 <ToDoDetails>
@@ -74,11 +77,15 @@ export default function ToDo({ navigation }) {
 const styles = StyleSheet.create({
   toDoContainerNotDone: {
     borderColor: '#4a4a4a',
-    borderWidth: 1.5
+    borderBottomWidth: 1.5,
+    borderTopWidth: 1.5,
+    borderStyle: 'solid',
   },
   toDoContainerDone: {
     borderColor: '#4a4a4a',
-    borderWidth: 1.5
+    borderLeftWidth: 1.5,
+    borderRightWidth: 1.5,
+    borderStyle: 'dotted'
   },
   checkbox: {
     height: 25,

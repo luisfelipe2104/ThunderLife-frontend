@@ -5,9 +5,11 @@ export const ToDoContainer = styled.TouchableOpacity`
     flex-direction: row;
     justify-content: space-between;
     width: 97%;
-    height: 60px;
-    padding: 0px 10px 0px 10px;
+    height: 58px;
+    padding: 0px 10px 0px 8px;
     margin-bottom: 8px;
+    border: 1.4px solid #4a4a4a;
+    border-style: solid dotted;
 `
 
 export const ToDoList = styled.FlatList`
@@ -40,9 +42,10 @@ export const ToDoContent = styled.View`
 `
 
 export const ToDoTitle = styled.Text`
-    color: #FFFFFF;
-    padding-left: 10px;
-    font-size: 18px;
+    color: #999999;
+    padding-left: 8px;
+    font-size: 17.5px;
+    font-weight: 700;
 `
 
 export const ToDoDetails = styled.View`
@@ -53,7 +56,7 @@ export const ToDoDetails = styled.View`
 `
 
 export const DetailText = styled.Text`
-    color: #3f65fc;
+    color: #999999;
     font-size: 14px;
 `
 
