@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Modal, Vibration } from 'react-native'
 import { MainContainer, Header, HeaderTitle } from '../../components/HabitTrackerComponents'
 import { ToDoList, HeaderSubtitle, ToDoHeader, ToDoContent, ToDoDetails, DetailText, ToDoTitle, ToDoContainer, LinedText } from '../../components/ToDoComponents';
 
@@ -7,20 +7,28 @@ import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { getToDoList } from '../../services/toDo';
+import { getToDoList, changeTodoStatus } from '../../services/toDo';
 import { DataContext } from '../../contexts/DataContext';
 
 import { useIsFocused } from '@react-navigation/native';
+import DeleteToDoModal from '../../components/modals/DeleteToDoModal';
 
 export default function ToDo({ navigation }) {
   const { user_id } = useContext(DataContext)
   const [isSelected, setSelection] = useState(false)
   const [toDoList, setToDoList] = useState(null)
   const isFocused = useIsFocused()
+  const [donePercent, setDonePercent] = useState(null)
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false)
 
   const getData = async () => {
     const data = await getToDoList(user_id)
     setToDoList(data)
+    const dones = await data.filter((item) => {
+      return item.status === 'done'
+    })
+    const percent = (dones.length / data.length) * 100
+    setDonePercent(percent.toFixed(2))
   }
 
   useEffect(() => {
@@ -43,17 +51,30 @@ export default function ToDo({ navigation }) {
           <Ionicons name="add" size={35} color="#FFF" />
         </TouchableOpacity>
       </Header>
-      <ToDoHeader>
-        <HeaderSubtitle>To-do-list</HeaderSubtitle>
-        <HeaderSubtitle>50%</HeaderSubtitle>
-      </ToDoHeader>
 
       <ToDoList
         data={toDoList}
+        ListHeaderComponent={
+          <ToDoHeader>
+            <HeaderSubtitle>To-do-list</HeaderSubtitle>
+            <HeaderSubtitle>{donePercent}%</HeaderSubtitle>
+          </ToDoHeader>
+        }
         renderItem={({ item }) => {
           return (
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-              <ToDoContainer>
+              <ToDoContainer 
+                onPress={async () => {
+                  await changeTodoStatus(item.id)
+                  .then(() => {
+                    getData()
+                  })
+                }}
+                onLongPress={async () => {
+                  Vibration.vibrate(100)
+                  setDeleteModalVisible(true)
+                }}
+                >
                 <ToDoContent>
                   { item.status === 'done' ? (
                     <MaterialIcons name="done" size={24} color="#5ad170" />
@@ -71,10 +92,22 @@ export default function ToDo({ navigation }) {
                   <DetailText>{item.scheduledHour}</DetailText>
                 </ToDoDetails>
               </ToDoContainer>
+              <Modal
+                visible={deleteModalVisible}
+                transparent={true}
+                onRequestClose={() => setDeleteModalVisible(false)}
+              >
+                <DeleteToDoModal 
+                  todo_id={item.id} 
+                  getData={getData}
+                  handleClose={() => setDeleteModalVisible(false)}
+                />
+              </Modal>
             </View>
           )
         }}
       />
+      
     </MainContainer>
   )
 }

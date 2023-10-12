@@ -25,7 +25,7 @@ export const ToDoHeader = styled.View`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 5px 6px 10px 6px;
+    padding: 5px 9px 10px 9px;
     font-style: italic;
     font-weight: 800;
 `

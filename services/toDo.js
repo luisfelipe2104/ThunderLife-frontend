@@ -22,3 +22,25 @@ export const getToDoList = async (user_id) => {
         return { data: err.response.data.msg, status: 'error' }
     }
 }
+
+export const changeTodoStatus = async (todoId) => {
+    try {
+        const { data } = await api.patch(`/api/toDo?todo_id=${todoId}`)
+        console.log(data);
+        return data
+    } catch (err) {
+        console.log(err);
+        return { data: err.response.data.msg, status: 'error' }
+    }
+}
+
+export const deleteTodo = async (todoId) => {
+    try {
+        const { data } = await api.delete(`/api/toDo?todoID=${todoId}`)
+        console.log(data);
+        return data.msg
+    } catch (err) {
+        console.log(err);
+        return { data: err.response.data.msg, status: 'error' }
+    }
+}
