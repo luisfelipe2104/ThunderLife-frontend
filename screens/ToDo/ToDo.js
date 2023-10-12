@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { MainContainer, Header, HeaderTitle } from '../../components/HabitTrackerComponents'
-import { ToDoList, HeaderSubtitle, ToDoHeader, ToDoContent, ToDoDetails, DetailText, ToDoTitle, ToDoContainer } from '../../components/ToDoComponents';
+import { ToDoList, HeaderSubtitle, ToDoHeader, ToDoContent, ToDoDetails, DetailText, ToDoTitle, ToDoContainer, LinedText } from '../../components/ToDoComponents';
 
 import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons'; 
@@ -27,13 +27,13 @@ export default function ToDo({ navigation }) {
     getData()
   }, [isFocused])
 
-  if (!toDoList) {
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    )
-  }
+  // if (!toDoList) {
+  //   return (
+  //     <View>
+  //       <Text>Loading...</Text>
+  //     </View>
+  //   )
+  // }
 
   return (
     <MainContainer>
@@ -56,11 +56,16 @@ export default function ToDo({ navigation }) {
               <ToDoContainer>
                 <ToDoContent>
                   { item.status === 'done' ? (
-                    <MaterialIcons name="done" size={24} color="black" />
+                    <MaterialIcons name="done" size={24} color="#5ad170" />
                   ) : (
                     <Entypo name="dots-three-horizontal" size={24} color="#4a4646" />
                   )}
-                  <ToDoTitle>{item.toDoName}</ToDoTitle>
+                  <ToDoTitle>
+                    {item.status === 'done' ? (
+                      <LinedText>{item.toDoName}</LinedText>
+                  ) : (
+                    item.toDoName
+                  )}</ToDoTitle>
                 </ToDoContent>
                 <ToDoDetails>
                   <DetailText>{item.scheduledHour}</DetailText>

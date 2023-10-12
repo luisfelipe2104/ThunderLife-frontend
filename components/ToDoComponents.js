@@ -9,7 +9,7 @@ export const ToDoContainer = styled.TouchableOpacity`
     padding: 0px 10px 0px 8px;
     margin-bottom: 8px;
     border: 1.4px solid #4a4a4a;
-    border-style: solid dotted;
+    /* border-style: solid dotted; */
 `
 
 export const ToDoList = styled.FlatList`
@@ -46,6 +46,10 @@ export const ToDoTitle = styled.Text`
     padding-left: 8px;
     font-size: 17.5px;
     font-weight: 700;
+`
+
+export const LinedText = styled.Text`
+    text-decoration: line-through;
 `
 
 export const ToDoDetails = styled.View`
